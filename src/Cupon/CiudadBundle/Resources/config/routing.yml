@@ -1,0 +1,3 @@
+ciudad_recientes:
+    path:     /{ciudad}/recientes
+    defaults: { _controller: CiudadBundle:Default:recientes }
