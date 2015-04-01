@@ -37,6 +37,10 @@ security:
         tiendas:
               entity: { class: Cupon\TiendaBundle\Entity\Tienda, property: login }
 
+    #cambiar plaintext a la otra encriptación
     encoders:
         Cupon\UsuarioBundle\Entity\Usuario: plaintext
         Cupon\TiendaBundle\Entity\Usuario: plaintext
+
+    access_decision_manager:
+        strategy: unanimous
