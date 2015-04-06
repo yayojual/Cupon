@@ -72,3 +72,4 @@ swiftmailer:
 #Paramteros
 parameters:
     cupon.ciudad_por_defecto: 'barcelona'
+    cupon.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/

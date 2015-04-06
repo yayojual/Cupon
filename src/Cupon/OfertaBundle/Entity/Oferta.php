@@ -4,6 +4,8 @@ namespace Cupon\OfertaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cupon\OfertaBundle\Util\Util;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Oferta
@@ -15,7 +17,6 @@ use Cupon\OfertaBundle\Util\Util;
 class Oferta
 {
     /**
-     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -24,86 +25,91 @@ class Oferta
     private $id;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $slug;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 30)
      */
     private $descripcion;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="condiciones", type="text")
      */
     private $condiciones;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="ruta_foto", type="string", length=255)
+     * @Assert\Range(min = 0)
      */
     private $rutaFoto;
+    
+    /**
+    * @Assert\Image(maxSize = "500k")
+    */
+    protected $foto;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="precio", type="decimal")
+     * @ORM\Column(name="precio", type="decimal", scale=2)
+     * 
+     * @Assert\Range(min = 0)
      */
     private $precio;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="descuento", type="decimal")
+     * @ORM\Column(name="descuento", type="decimal", scale=2)
      */
     private $descuento;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="fecha_publicacion", type="datetime")
+     * @ORM\Column(name="fecha_publicacion", type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $fechaPublicacion;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="fecha_expiracion", type="datetime")
+     * @ORM\Column(name="fecha_expiracion", type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $fechaExpiracion;
 
     /**
-     * @var integer
      *
      * @ORM\Column(name="compras", type="integer")
      */
     private $compras;
 
     /**
-     * @var integer
      *
      * @ORM\Column(name="umbral", type="integer")
+     * @Assert\Type(type="integer")
+     * @Assert\Range(min = 0)
      */
     private $umbral;
 
     /**
-     * @var boolean
      *
      * @ORM\Column(name="revisada", type="boolean")
+     * @Assert\Type(type="bool")
      */
     private $revisada;
 
@@ -128,13 +134,11 @@ class Oferta
      * Set nombre
      *
      * @param string $nombre
-     * @return Oferta
      */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
-		$this->slug = Util::getSlug($nombre);
-        return $this;
+        $this->slug = Util::getSlug($nombre);
     }
 
     /**
@@ -151,13 +155,10 @@ class Oferta
      * Set slug
      *
      * @param string $slug
-     * @return Oferta
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
-        return $this;
     }
 
     /**
@@ -173,20 +174,17 @@ class Oferta
     /**
      * Set descripcion
      *
-     * @param string $descripcion
-     * @return Oferta
+     * @param text $descripcion
      */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
-    
-        return $this;
     }
 
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return text
      */
     public function getDescripcion()
     {
@@ -196,20 +194,17 @@ class Oferta
     /**
      * Set condiciones
      *
-     * @param string $condiciones
-     * @return Oferta
+     * @param text $condiciones
      */
     public function setCondiciones($condiciones)
     {
         $this->condiciones = $condiciones;
-    
-        return $this;
     }
 
     /**
      * Get condiciones
      *
-     * @return string 
+     * @return text 
      */
     public function getCondiciones()
     {
@@ -220,13 +215,10 @@ class Oferta
      * Set rutaFoto
      *
      * @param string $rutaFoto
-     * @return Oferta
      */
     public function setRutaFoto($rutaFoto)
     {
         $this->rutaFoto = $rutaFoto;
-    
-        return $this;
     }
 
     /**
@@ -242,20 +234,17 @@ class Oferta
     /**
      * Set precio
      *
-     * @param string $precio
-     * @return Oferta
+     * @param decimal $precio
      */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
-    
-        return $this;
     }
 
     /**
      * Get precio
      *
-     * @return string 
+     * @return decimal 
      */
     public function getPrecio()
     {
@@ -265,20 +254,17 @@ class Oferta
     /**
      * Set descuento
      *
-     * @param string $descuento
-     * @return Oferta
+     * @param decimal $descuento
      */
     public function setDescuento($descuento)
     {
         $this->descuento = $descuento;
-    
-        return $this;
     }
 
     /**
      * Get descuento
      *
-     * @return string 
+     * @return decimal 
      */
     public function getDescuento()
     {
@@ -289,13 +275,10 @@ class Oferta
      * Set fechaPublicacion
      *
      * @param \DateTime $fechaPublicacion
-     * @return Oferta
      */
     public function setFechaPublicacion($fechaPublicacion)
     {
         $this->fechaPublicacion = $fechaPublicacion;
-    
-        return $this;
     }
 
     /**
@@ -312,13 +295,10 @@ class Oferta
      * Set fechaExpiracion
      *
      * @param \DateTime $fechaExpiracion
-     * @return Oferta
      */
     public function setFechaExpiracion($fechaExpiracion)
     {
         $this->fechaExpiracion = $fechaExpiracion;
-    
-        return $this;
     }
 
     /**
@@ -335,13 +315,10 @@ class Oferta
      * Set compras
      *
      * @param integer $compras
-     * @return Oferta
      */
     public function setCompras($compras)
     {
         $this->compras = $compras;
-    
-        return $this;
     }
 
     /**
@@ -358,13 +335,10 @@ class Oferta
      * Set umbral
      *
      * @param integer $umbral
-     * @return Oferta
      */
     public function setUmbral($umbral)
     {
         $this->umbral = $umbral;
-    
-        return $this;
     }
 
     /**
@@ -381,13 +355,10 @@ class Oferta
      * Set revisada
      *
      * @param boolean $revisada
-     * @return Oferta
      */
     public function setRevisada($revisada)
     {
         $this->revisada = $revisada;
-    
-        return $this;
     }
 
     /**
@@ -401,27 +372,69 @@ class Oferta
     }
 
     public function setCiudad(\Cupon\CiudadBundle\Entity\Ciudad $ciudad)
-	{
-		$this->ciudad = $ciudad;
-	}
+    {
+        $this->ciudad = $ciudad;
+    }
 
-	public function getCiudad()
-	{
-		return $this->ciudad;
-	}
+    public function getCiudad()
+    {
+	return $this->ciudad;
+    }
 
-	public function setTienda(\Cupon\TiendaBundle\Entity\Tienda $tienda)
-	{
-		$this->tienda = $tienda;
-	}
+    public function setTienda(\Cupon\TiendaBundle\Entity\Tienda $tienda)
+    {
+	$this->tienda = $tienda;
+    }
 	
-	public function getTienda()
-	{
-		return $this->tienda;
-	}
+    public function getTienda()
+    {
+	return $this->tienda;
+    }
 	
-	public function __toString()
-	{
-		return $this->getNombre();
-	}
+    public function __toString()
+    {
+	return $this->getNombre();
+    }
+        
+    /**
+    * @Assert\True(message = "La fecha de expiración debe ser posterior a
+    *                         la fecha de publicación")
+    */
+    public function isFechaValida()
+    {
+        if ($this->fechaPublicacion == null
+        ||
+        $this->fechaExpiracion == null) {
+        return true;
+        }
+
+        return $this->fechaExpiracion > $this->fechaPublicacion;
+    }
+    
+    /**
+    * @param UploadedFile $foto
+    */
+    public function setFoto(UploadedFile $foto = null)
+    {
+        $this->foto = $foto;
+    }
+    
+    /**
+    * @return UploadedFile
+    */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+    
+    public function subirFoto($directorioDestino)
+    {
+        if (null === $this->foto) {
+            return;
+        }
+        
+        $nombreArchivoFoto = uniqid('cupon-').'-foto1.jpg';
+        $this->foto->move($directorioDestino, $nombreArchivoFoto);
+        $this->setRutaFoto($nombreArchivoFoto);
+    }
 }
