@@ -3,6 +3,7 @@
 namespace Cupon\TiendaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Cupon\TiendaBundle\Form\Extranet\TiendaType;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -33,6 +34,47 @@ class ExtranetController extends Controller
 	return $this->render('TiendaBundle:Extranet:login.html.twig', array(
 		'error' => $error
 	));
+    }
+    
+    public function perfilAction(){
+        $peticion = $this->getRequest();
+        
+        $tienda = $this->get('security.context')->getToken()->getUser();
+        $formulario = $this->createForm(new TiendaType(), $tienda);
+        
+        $passwordOriginal = $formulario->getData()->getPassword();
+        $formulario->handleRequest($peticion);
+        
+        if ($formulario->isValid()) {
+            if (null == $tienda->getPassword()) {
+                // La tienda no cambia su contraseña, utilizar la original
+                $tienda->setPassword($passwordOriginal);
+            } else {
+                // La tienda cambia su contraseña, codificar su valor
+                $encoder = $this->get('security.encoder_factory')
+                        ->getEncoder($tienda);
+                $passwordCodificado = $encoder->encodePassword(
+                $tienda->getPassword(),
+                $tienda->getSalt()
+                );
+                $tienda->setPassword($passwordCodificado);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tienda);
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('info',
+            'Los datos de tu perfil se han actualizado correctamente');
+
+            return $this->redirect(
+                $this->generateUrl('extranet_portada')
+            );
+        }
+        
+        return $this->render('TiendaBundle:Extranet:perfil.html.twig', array(
+            'tienda' => $tienda,
+            'formulario' => $formulario->createView()
+        ));
     }
     
     public function ofertaEditarAction($id)
