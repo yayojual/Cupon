@@ -45,7 +45,7 @@ class TiendaRepository extends EntityRepository
         $consulta = $em->createQuery('
         SELECT o, t FROM OfertaBundle:Oferta o JOIN o.tienda t
         WHERE o.tienda = :id
-        ORDER BY o.fecha_expiracion DESC');
+        ORDER BY o.fechaExpiracion DESC');
         $consulta->setParameter('id', $tienda_id);
 
         if (null != $limite) {

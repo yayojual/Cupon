@@ -41,8 +41,7 @@ security:
     encoders:
         Cupon\UsuarioBundle\Entity\Usuario: plaintext
         Cupon\TiendaBundle\Entity\Tienda: plaintext
-        #{ algorithm: sha512, iterations: 10 }
-        #Symfony\Component\Security\Core\User\User: sha512
+        Symfony\Component\Security\Core\User\User: sha512
 
     access_decision_manager:
         strategy: unanimous
