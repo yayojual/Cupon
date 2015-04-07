@@ -1,22 +1,41 @@
-usuario:
-    resource: "@UsuarioBundle/Resources/config/routing.yml"
-    prefix:   /
-
-tienda:
-    resource: "@TiendaBundle/Resources/config/routing.yml"
-    prefix:   /
-
-ciudad:
-    resource: "@CiudadBundle/Resources/config/routing.yml"
-    prefix:   /
-
-oferta:
-    resource: "@OfertaBundle/Resources/config/routing.yml"
-    prefix:   /
-
 pagina_estatica:
     path:     /sitio/{pagina}/
     defaults: { _controller: OfertaBundle:Sitio:estatica }
+
+# Rutas importadas del bundle CiudadBundle
+CiudadBundle:
+    resource: "@CiudadBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Rutas importadas del bundle OfertaBundle
+OfertaBundle:
+    resource: "@OfertaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Rutas importadas del bundle TiendaBundle
+TiendaBundle:
+    resource: "@TiendaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Rutas importadas de la parte de extranet del bundle TiendaBundle
+Extranet:
+    resource: "@TiendaBundle/Resources/config/extranet/routing.yml"
+    prefix:   /extranet
+
+# Rutas importadas del bundle UsuarioBundle
+UsuarioBundle:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /usuario
+
+# Rutas importadas del bundle BackendBundle
+BackendBundle:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+# Ruta para mostrar el formulario de contacto
+contacto:
+    pattern:  /contacto
+    defaults: { _controller: OfertaBundle:Sitio:contacto}
 
 portada:
     path:     /{ciudad}
@@ -31,14 +50,7 @@ ciudad_cambiar:
     defaults: { _controller: CiudadBundle:Default:cambiar }
     requirements:
         ciudad: .+
+
 oferta:
     path:     /{ciudad}/ofertas/{slug}
     defaults: { _controller: OfertaBundle:Default:oferta }
-
-UsuarioBundle:
-    resource: "@UsuarioBundle/Resources/config/routing.yml"
-    prefix: /usuario
-
-Extranet:
-    resource: '@TiendaBundle/Resources/config/extranet/routing.yml'
-    prefix: /extranet
