@@ -26,10 +26,12 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
         }
 		
-		return $this->render(
-			'OfertaBundle:Default:portada.html.twig',
-			array('oferta' => $oferta)
-		);
+		$respuesta = $this->render('OfertaBundle:Default:portada.html.twig',
+                    array('oferta' => $oferta)
+                    );
+                $respuesta->setPublic();
+                
+                return $respuesta;
 	}
 	
 	public function ofertaAction($ciudad, $slug)
