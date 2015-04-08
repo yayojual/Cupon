@@ -1,7 +1,31 @@
 {% extends '::backend.html.twig' %}
 
 {% block article %}
-<h1>Oferta list</h1>
+<h1>Oferta lista</h1>
+
+<ul class="paginador">
+    {% if paginador.currentPage > 1 %}
+    <li><a href="{{ path('backend_oferta', { 'page': paginador.previousPage
+    }) }}">Anterior</a></li>
+    {% else %}
+    <li>Anterior</li>
+    {% endif %}
+    {% for page in paginador.minPageInRange..paginador.maxPageInRange %}
+    {% if page == paginador.currentPage %}
+    <li class="actual">{{ page }}</li>
+    {% else %}
+    <li><a href="{{ path('backend_oferta', { 'page': page }) }}">{{ page
+    }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if paginador.currentPage < paginador.lastPage %}
+    <li><a href="{{ path('backend_oferta', { 'page': paginador.nextPage })
+    }}">Siguiente</a></li>
+    {% else %}
+    <li>Siguiente</li>
+    {% endif %}
+</ul>
+
 <table class="records_list">
     <thead>
     <tr>

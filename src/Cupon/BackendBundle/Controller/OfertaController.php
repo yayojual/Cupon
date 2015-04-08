@@ -21,13 +21,22 @@ class OfertaController extends Controller
      *
      */
     public function indexAction()
-    {
+    {   
+        $sesion = $this->getRequest()->getSession();
+        if (null == $slug = $sesion->get('ciudad')) {
+            $slug = $this->container->getParameter('cupon.ciudad_por_defecto');
+            $sesion->set('ciudad', $slug);
+        }
+        
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('OfertaBundle:Oferta')->findAll();
+        $paginador = $this->get('ideup.simple_paginator');
+        $entities = $paginador->paginate(
+        $em->getRepository('CiudadBundle:Ciudad')->queryTodasLasOfertas($slug)
+        )->getResult();
 
         return $this->render('BackendBundle:Oferta:index.html.twig', array(
             'entities' => $entities,
+            'paginador' => $paginador
         ));
     }
     /**
