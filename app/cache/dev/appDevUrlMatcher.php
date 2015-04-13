@@ -349,6 +349,126 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
+            if (0 === strpos($pathinfo, '/backend/tienda')) {
+                // backend_tienda
+                if (rtrim($pathinfo, '/') === '/backend/tienda') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'backend_tienda');
+                    }
+
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::indexAction',  '_route' => 'backend_tienda',);
+                }
+
+                // backend_tienda_show
+                if (preg_match('#^/backend/tienda/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_tienda_show')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::showAction',));
+                }
+
+                // backend_tienda_new
+                if ($pathinfo === '/backend/tienda/new') {
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::newAction',  '_route' => 'backend_tienda_new',);
+                }
+
+                // backend_tienda_create
+                if ($pathinfo === '/backend/tienda/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_backend_tienda_create;
+                    }
+
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::createAction',  '_route' => 'backend_tienda_create',);
+                }
+                not_backend_tienda_create:
+
+                // backend_tienda_edit
+                if (preg_match('#^/backend/tienda/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_tienda_edit')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::editAction',));
+                }
+
+                // backend_tienda_update
+                if (preg_match('#^/backend/tienda/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_backend_tienda_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_tienda_update')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::updateAction',));
+                }
+                not_backend_tienda_update:
+
+                // backend_tienda_delete
+                if (preg_match('#^/backend/tienda/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_backend_tienda_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_tienda_delete')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\TiendaController::deleteAction',));
+                }
+                not_backend_tienda_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/backend/usuario')) {
+                // backend_usuario
+                if (rtrim($pathinfo, '/') === '/backend/usuario') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'backend_usuario');
+                    }
+
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::indexAction',  '_route' => 'backend_usuario',);
+                }
+
+                // backend_usuario_show
+                if (preg_match('#^/backend/usuario/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_usuario_show')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::showAction',));
+                }
+
+                // backend_usuario_new
+                if ($pathinfo === '/backend/usuario/new') {
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::newAction',  '_route' => 'backend_usuario_new',);
+                }
+
+                // backend_usuario_create
+                if ($pathinfo === '/backend/usuario/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_backend_usuario_create;
+                    }
+
+                    return array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::createAction',  '_route' => 'backend_usuario_create',);
+                }
+                not_backend_usuario_create:
+
+                // backend_usuario_edit
+                if (preg_match('#^/backend/usuario/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_usuario_edit')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::editAction',));
+                }
+
+                // backend_usuario_update
+                if (preg_match('#^/backend/usuario/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_backend_usuario_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_usuario_update')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::updateAction',));
+                }
+                not_backend_usuario_update:
+
+                // backend_usuario_delete
+                if (preg_match('#^/backend/usuario/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_backend_usuario_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'backend_usuario_delete')), array (  '_controller' => 'Cupon\\BackendBundle\\Controller\\UsuarioController::deleteAction',));
+                }
+                not_backend_usuario_delete:
+
+            }
+
         }
 
         // contacto

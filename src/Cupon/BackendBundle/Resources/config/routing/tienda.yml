@@ -1,0 +1,30 @@
+backend_tienda:
+    path:     /
+    defaults: { _controller: "BackendBundle:Tienda:index" }
+
+backend_tienda_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Tienda:show" }
+
+backend_tienda_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Tienda:new" }
+
+backend_tienda_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Tienda:create" }
+    requirements: { _method: post }
+
+backend_tienda_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Tienda:edit" }
+
+backend_tienda_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Tienda:update" }
+    requirements: { _method: post|put }
+
+backend_tienda_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Tienda:delete" }
+    requirements: { _method: post|delete }

@@ -17,3 +17,13 @@ BackendCiudad:
 BackendOferta:
     resource: "@BackendBundle/Resources/config/routing/oferta.yml"
     prefix:   /oferta
+    
+# Importar las rutas de la entidad Tienda generadas en el bundle BackendBundle
+BackendTienda:
+    resource: "@BackendBundle/Resources/config/routing/tienda.yml"
+    prefix:   /tienda
+    
+# Importar las rutas de la entidad Tienda generadas en el bundle BackendBundle
+BackendUsuario:
+    resource: "@BackendBundle/Resources/config/routing/usuario.yml"
+    prefix:   /usuario
