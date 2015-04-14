@@ -54,6 +54,67 @@ class __TwigTemplate_98e75a98049d6e81e455b243836789ddea85a411fc0a35631df98c3bdc9
         $this->displayBlock("title", $context, $blocks);
         echo "</h1>
 
+<ul class=\"paginador\">
+    ";
+        // line 10
+        if (($this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "currentPage", array()) > 1)) {
+            // line 11
+            echo "    <li><a href=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("backend_usuario", array("page" => $this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "previousPage", array()))), "html", null, true);
+            // line 12
+            echo "\">Anterior</a></li>
+    ";
+        } else {
+            // line 14
+            echo "    <li>Anterior</li>
+    ";
+        }
+        // line 16
+        echo "    ";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable(range($this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "minPageInRange", array()), $this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "maxPageInRange", array())));
+        foreach ($context['_seq'] as $context["_key"] => $context["page"]) {
+            // line 17
+            echo "    ";
+            if (($context["page"] == $this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "currentPage", array()))) {
+                // line 18
+                echo "    <li class=\"actual\">";
+                echo twig_escape_filter($this->env, $context["page"], "html", null, true);
+                echo "</li>
+    ";
+            } else {
+                // line 20
+                echo "    <li><a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("backend_usuario", array("page" => $context["page"])), "html", null, true);
+                echo "\">";
+                echo twig_escape_filter($this->env, $context["page"], "html", null, true);
+                // line 21
+                echo "</a></li>
+    ";
+            }
+            // line 23
+            echo "    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['page'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 24
+        echo "    ";
+        if (($this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "currentPage", array()) < $this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "lastPage", array()))) {
+            // line 25
+            echo "    <li><a href=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("backend_usuario", array("page" => $this->getAttribute((isset($context["paginador"]) ? $context["paginador"] : $this->getContext($context, "paginador")), "nextPage", array()))), "html", null, true);
+            // line 26
+            echo "\">Siguiente</a></li>
+    ";
+        } else {
+            // line 28
+            echo "    <li>Siguiente</li>
+    ";
+        }
+        // line 30
+        echo "</ul>
+
 <table class=\"records_list\">
     <thead>
         <tr>
@@ -68,47 +129,47 @@ class __TwigTemplate_98e75a98049d6e81e455b243836789ddea85a411fc0a35631df98c3bdc9
     </thead>
     <tbody>
     ";
-        // line 22
+        // line 45
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : $this->getContext($context, "entities")));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 23
+            // line 46
             echo "        <tr>
             <td>";
-            // line 24
+            // line 47
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "dni", array()), "html", null, true);
             echo "</td>
             <td>";
-            // line 25
+            // line 48
             echo twig_escape_filter($this->env, (($this->getAttribute($context["entity"], "nombre", array()) . " ") . $this->getAttribute($context["entity"], "apellidos", array())), "html", null, true);
             echo "</td>
             <td>";
-            // line 26
+            // line 49
             echo twig_escape_filter($this->env, (twig_date_format_filter($this->env, "now", "Y") - twig_date_format_filter($this->env, $this->getAttribute($context["entity"], "fechaNacimiento", array()), "Y")), "html", null, true);
             echo "</td>
             <td>";
-            // line 27
+            // line 50
             echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "email", array()), "html", null, true);
             echo "</td>
             <td>";
-            // line 28
+            // line 51
             echo (($this->getAttribute($context["entity"], "permiteemail", array())) ? ("<span class=\"si\">&#10004;</span>") : ("<span class=\"no\">&#10008;</span>"));
             echo "</td>
             <td>";
-            // line 29
+            // line 52
             echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($context["entity"], "fechaalta", array()), "medium"), "html", null, true);
             echo "</td>
             <td>
                 <ul>
                     <li>
                         <a href=\"";
-            // line 33
+            // line 56
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("backend_usuario_show", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\">Detalles</a>
                     </li>
                     <li>
                         <a href=\"";
-            // line 36
+            // line 59
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("backend_usuario_edit", array("id" => $this->getAttribute($context["entity"], "id", array()))), "html", null, true);
             echo "\">Modificar</a>
                     </li>
@@ -120,25 +181,20 @@ class __TwigTemplate_98e75a98049d6e81e455b243836789ddea85a411fc0a35631df98c3bdc9
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 42
+        // line 65
         echo "    </tbody>
 </table>
 
 ";
-        // line 45
+        // line 68
         $this->env->loadTemplate("BackendBundle:Default:paginador.html.twig")->display(array("ruta" => "backend_usuario"));
-        // line 46
+        // line 69
         echo "
-<ul>
-    <li>
-        <a class=\"boton\" href=\"";
-        // line 49
+<a class=\"boton\" href=\"";
+        // line 70
         echo $this->env->getExtension('routing')->getPath("backend_usuario_new");
         echo "\">
-            Añadir un nuevo usuario
-        </a>
-    </li>
-</ul>
+            Añadir un nuevo usuario</a>
 ";
     }
 
@@ -154,6 +210,6 @@ class __TwigTemplate_98e75a98049d6e81e455b243836789ddea85a411fc0a35631df98c3bdc9
 
     public function getDebugInfo()
     {
-        return array (  136 => 49,  131 => 46,  129 => 45,  124 => 42,  112 => 36,  106 => 33,  99 => 29,  95 => 28,  91 => 27,  87 => 26,  83 => 25,  79 => 24,  76 => 23,  72 => 22,  53 => 7,  50 => 6,  44 => 4,  38 => 3,  11 => 1,);
+        return array (  195 => 70,  192 => 69,  190 => 68,  185 => 65,  173 => 59,  167 => 56,  160 => 52,  156 => 51,  152 => 50,  148 => 49,  144 => 48,  140 => 47,  137 => 46,  133 => 45,  116 => 30,  112 => 28,  108 => 26,  105 => 25,  102 => 24,  96 => 23,  92 => 21,  87 => 20,  81 => 18,  78 => 17,  73 => 16,  69 => 14,  65 => 12,  62 => 11,  60 => 10,  53 => 7,  50 => 6,  44 => 4,  38 => 3,  11 => 1,);
     }
 }

@@ -1,7 +1,7 @@
 {% extends '::backend.html.twig' %}
 
 {% block article %}
-<h1>Oferta lista</h1>
+<h1>Listado de ofertas</h1>
 
 <ul class="paginador">
     {% if paginador.currentPage > 1 %}
@@ -74,7 +74,5 @@
     {% endfor %}
     </tbody>
 </table>
-<ul>
-    <li><a href="{{ path('backend_oferta_new') }}">Create a new entry</a></li>
-</ul>
+<a class="boton" href="{{ path('backend_oferta_new') }}">Añadir una nueva oferta</a>
 {% endblock %}

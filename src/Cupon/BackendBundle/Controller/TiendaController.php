@@ -17,10 +17,14 @@ class TiendaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $slug = $this->getRequest()->getSession()->get('ciudad');
-        $entities = $em->getRepository('CiudadBundle:Ciudad')->findTodasLasTiendas($slug);
+        $paginador = $this->get('ideup.simple_paginator');
+        //$slug = $this->getRequest()->getSession()->get('ciudad');
+        $entities = $paginador->paginate(
+                $em->getRepository('CiudadBundle:Ciudad')->queryTodasLasTiendas()
+        )->getResult();
         return $this->render('BackendBundle:Tienda:index.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities,
+            'paginador' => $paginador
         ));
     }
     /**

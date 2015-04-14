@@ -36,7 +36,7 @@ class __TwigTemplate_57e5833679659a160a24f7b062a83c9ac0e293eb9d91f84424e66e5c04d
     public function block_article($context, array $blocks = array())
     {
         // line 4
-        echo "<h1>Oferta lista</h1>
+        echo "<h1>Listado de ofertas</h1>
 
 <ul class=\"paginador\">
     ";
@@ -200,12 +200,10 @@ $context["entity"], "id", array()))), "html", null, true);
         // line 75
         echo "    </tbody>
 </table>
-<ul>
-    <li><a href=\"";
-        // line 78
+<a class=\"boton\" href=\"";
+        // line 77
         echo $this->env->getExtension('routing')->getPath("backend_oferta_new");
-        echo "\">Create a new entry</a></li>
-</ul>
+        echo "\">Añadir una nueva oferta</a>
 ";
     }
 
@@ -221,6 +219,6 @@ $context["entity"], "id", array()))), "html", null, true);
 
     public function getDebugInfo()
     {
-        return array (  206 => 78,  201 => 75,  190 => 70,  189 => 69,  185 => 68,  184 => 67,  178 => 64,  174 => 63,  170 => 62,  167 => 61,  161 => 59,  159 => 58,  155 => 56,  149 => 54,  147 => 53,  142 => 51,  138 => 50,  134 => 49,  129 => 48,  127 => 47,  124 => 46,  120 => 45,  100 => 27,  96 => 25,  92 => 23,  89 => 22,  86 => 21,  80 => 20,  76 => 18,  71 => 17,  65 => 15,  62 => 14,  57 => 13,  53 => 11,  49 => 9,  46 => 8,  44 => 7,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  205 => 77,  201 => 75,  190 => 70,  189 => 69,  185 => 68,  184 => 67,  178 => 64,  174 => 63,  170 => 62,  167 => 61,  161 => 59,  159 => 58,  155 => 56,  149 => 54,  147 => 53,  142 => 51,  138 => 50,  134 => 49,  129 => 48,  127 => 47,  124 => 46,  120 => 45,  100 => 27,  96 => 25,  92 => 23,  89 => 22,  86 => 21,  80 => 20,  76 => 18,  71 => 17,  65 => 15,  62 => 14,  57 => 13,  53 => 11,  49 => 9,  46 => 8,  44 => 7,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

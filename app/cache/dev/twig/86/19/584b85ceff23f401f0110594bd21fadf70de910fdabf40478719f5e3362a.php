@@ -72,9 +72,11 @@ class __TwigTemplate_8619584b85ceff23f401f0110594bd21fadf70de910fdabf40478719f5e
         echo "\">Ofertas</a></li>
             <li><a href=\"";
         // line 18
+        echo $this->env->getExtension('routing')->getPath("backend_tienda");
         echo "\">Tiendas</a></li>
             <li><a href=\"";
         // line 19
+        echo $this->env->getExtension('routing')->getPath("backend_usuario");
         echo "\">Usuarios</a></li>
             <li><a href=\"";
         // line 20
@@ -115,6 +117,6 @@ class __TwigTemplate_8619584b85ceff23f401f0110594bd21fadf70de910fdabf40478719f5e
 
     public function getDebugInfo()
     {
-        return array (  102 => 28,  97 => 29,  95 => 28,  86 => 22,  85 => 21,  81 => 20,  78 => 19,  75 => 18,  71 => 17,  65 => 14,  62 => 13,  59 => 12,  52 => 8,  47 => 6,  41 => 4,  38 => 3,  11 => 1,);
+        return array (  104 => 28,  99 => 29,  97 => 28,  88 => 22,  87 => 21,  83 => 20,  79 => 19,  75 => 18,  71 => 17,  65 => 14,  62 => 13,  59 => 12,  52 => 8,  47 => 6,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

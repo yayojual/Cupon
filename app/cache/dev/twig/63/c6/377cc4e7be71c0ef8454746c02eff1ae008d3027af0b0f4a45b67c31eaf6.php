@@ -1,6 +1,6 @@
 <?php
 
-/* OfertaBundle:Default/includes:oferta.html.twig */
+/* OfertaBundle:Default:includes/oferta.html.twig */
 class __TwigTemplate_63c6377cc4e7be71c0ef8454746c02eff1ae008d3027af0b0f4a45b67c31eaf6 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -144,7 +144,7 @@ class __TwigTemplate_63c6377cc4e7be71c0ef8454746c02eff1ae008d3027af0b0f4a45b67c3
 
     public function getTemplateName()
     {
-        return "OfertaBundle:Default/includes:oferta.html.twig";
+        return "OfertaBundle:Default:includes/oferta.html.twig";
     }
 
     public function isTraitable()

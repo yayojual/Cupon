@@ -83,16 +83,15 @@ class CiudadRepository extends EntityRepository
         *
         * @param string $ciudad El slug de la ciudad
         */
-        public function queryTodasLasTiendas($ciudad)
+        //Todas las tiendas sin filtrar por ciudad
+        public function queryTodasLasTiendas()
         {
             $em = $this->getEntityManager();
             $consulta = $em->createQuery('
                 SELECT t
-                FROM TiendaBundle:Tienda t JOIN t.ciudad c
-                WHERE c.slug = :ciudad
+                FROM TiendaBundle:Tienda t
                 ORDER BY t.nombre ASC
             ');
-            $consulta->setParameter('ciudad', $ciudad);
             $consulta->useResultCache(true, 600);
             return $consulta;
         }
