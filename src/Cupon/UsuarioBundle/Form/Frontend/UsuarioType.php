@@ -21,7 +21,9 @@ class UsuarioType extends AbstractType
 			))
 			->add('direccion')
 			->add('permite_email', 'checkbox', array('required' => false))
-			->add('fecha_nacimiento', 'birthday')
+			->add('fecha_nacimiento', 'birthday', array(
+                            'widget' => 'choice',
+                            'years' => range(1950, date('Y'))))
 			->add('dni')
 			->add('numero_tarjeta')
 			->add('ciudad')

@@ -23,7 +23,9 @@ class UsuarioType extends AbstractType
             ->add('direccion')
             ->add('permiteEmail')
             ->add('fechaAlta')
-            /*->add('fechaNacimiento')*/
+            ->add('fecha_nacimiento', 'birthday', array(
+                            'widget' => 'choice',
+                            'years' => range(1950, date('Y'))))
             ->add('dni')
             ->add('numeroTarjeta')
             ->add('ciudad')
